@@ -1,24 +1,16 @@
+<div class="announcement-bar color-background-2" role="region" aria-label="{{ 'sections.header.announcement' | t }}" {{ block.shopify_attributes }}>
 {%- for block in section.blocks -%}
   {%- case block.type -%}
     {%- when 'announcement' -%}
-      <div class="announcement-bar color-{{ block.settings.color_scheme }} gradient" role="region" aria-label="{{ 'sections.header.announcement' | t }}" {{ block.shopify_attributes }}>
-        {%- if block.settings.text != blank -%}
-          {%- if block.settings.link != blank -%}
-            <a href="{{ block.settings.link }}" class="announcement-bar__link link link--text focus-inset animate-arrow">
-          {%- endif -%}
-              <p class="announcement-bar__message h5">
-                {{ block.settings.text | escape }}
-                {%- if block.settings.link != blank -%}
-                  {% render 'icon-arrow' %}
-                {%- endif -%}
-              </p>
-          {%- if block.settings.link != blank -%}
-            </a>
-          {%- endif -%}
-        {%- endif -%}
-      </div>
+      {%- if block.settings.rich_text != blank -%}
+        <div class="announcement-bar__message {{ block.settings.alignment }}">
+          {{ block.settings.rich_text | safe }}               
+        </div>
+      {%- endif -%}
   {%- endcase -%}
 {%- endfor -%}
+</div>
+
 
 {% schema %}
 {
@@ -30,43 +22,30 @@
       "name": "t:sections.announcement-bar.blocks.announcement.name",
       "settings": [
         {
-          "type": "text",
-          "id": "text",
-          "default": "Welcome to our store",
-          "label": "t:sections.announcement-bar.blocks.announcement.settings.text.label"
+          "type": "richtext",
+          "id": "rich_text",
+          "default": "<p>Welcome to our store</p>",
+          "label": "t:sections.announcement-bar.blocks.announcement.settings.rich_text.label"
         },
         {
           "type": "select",
-          "id": "color_scheme",
+          "id": "alignment",
           "options": [
             {
-              "value": "background-1",
-              "label": "t:sections.announcement-bar.blocks.announcement.settings.color_scheme.options__1.label"
+              "value": "left",
+              "label": "t:sections.announcement-bar.blocks.announcement.settings.alignment.options__1.label"
             },
             {
-              "value": "background-2",
-              "label": "t:sections.announcement-bar.blocks.announcement.settings.color_scheme.options__2.label"
+              "value": "center",
+              "label": "t:sections.announcement-bar.blocks.announcement.settings.alignment.options__2.label"
             },
             {
-              "value": "inverse",
-              "label": "t:sections.announcement-bar.blocks.announcement.settings.color_scheme.options__3.label"
-            },
-            {
-              "value": "accent-1",
-              "label": "t:sections.announcement-bar.blocks.announcement.settings.color_scheme.options__4.label"
-            },
-            {
-              "value": "accent-2",
-              "label": "t:sections.announcement-bar.blocks.announcement.settings.color_scheme.options__5.label"
+              "value": "right",
+              "label": "t:sections.announcement-bar.blocks.announcement.settings.alignment.options__3.label"
             }
           ],
-          "default": "accent-1",
-          "label": "t:sections.announcement-bar.blocks.announcement.settings.color_scheme.label"
-        },
-        {
-          "type": "url",
-          "id": "link",
-          "label": "t:sections.announcement-bar.blocks.announcement.settings.link.label"
+          "default": "left",
+          "label": "t:sections.announcement-bar.blocks.announcement.settings.alignment.label"
         }
       ]
     }

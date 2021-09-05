@@ -243,8 +243,8 @@
 
     {%- if section.settings.logo_position == 'top-center' or section.settings.menu == blank -%}
       <details-modal class="header__search">
-        <details>
-          <summary class="header__icon header__icon--search header__icon--summary link link--text focus-inset modal__toggle" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
+        <details class="header__search__wrapper">
+          <summary class="header__search__toggle header__icon header__icon--search header__icon--summary link link--text focus-inset modal__toggle" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
             <span>
               <svg class="modal__toggle-open icon icon-search" aria-hidden="true" focusable="false" role="presentation">
                 <use href="#icon-search">
@@ -252,8 +252,9 @@
               <svg class="modal__toggle-close icon icon-close" aria-hidden="true" focusable="false" role="presentation">
                 <use href="#icon-close">
               </svg>
-            </span>
+            </span> 
           </summary>
+
           <div class="search-modal modal__content" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
             <div class="modal-overlay"></div>
             <div class="search-modal__content" tabindex="-1">
@@ -322,8 +323,7 @@
         <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
           {%- if section.settings.logo != blank -%}
             {%- assign image_size = section.settings.logo_width | append: 'x' -%}
-            <img srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
-              src="{{ section.settings.logo | img_url: image_size }}"
+            <img src="{{ 'logo.svg' | asset_url }}"
               loading="lazy"
               class="header__heading-logo"
               width="{{ section.settings.logo.width }}"
