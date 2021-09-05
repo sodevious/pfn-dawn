@@ -1,0 +1,23 @@
+<div class="custom-text-section">
+  <h2> {{ section.settings.image }} </h2>
+  <div>{{ section.settings.custom_text_body }}</div>
+</div>
+
+{% schema %}
+  {
+    "name": "Hero",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "label"
+        },
+        {
+            "id": "custom_text_body",
+            "type": "richtext",
+            "label": "Add custom text below",
+            "default": "<p>Add your text here</p>"
+        }
+    ]
+  }
+{% endschema %}
